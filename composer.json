@@ -1,0 +1,40 @@
+{
+    "name": "kachkaev/counters-bundle",
+    "type": "symfony-bundle",
+    "description": "A simple bundle for embedding trackers into web pages",
+    "keywords": ["statistics", "counters", "google analytics", "yandex-metrika"],
+    "homepage": "http://github.com/kachkaev/KachkaevCountersBundle",
+    "license": "MIT",
+
+    "authors": [
+        {
+            "name": "Alexander Kachkaev",
+            "email": "alexander@kachkaev.ru",
+            "homepage": "http://en.kachkaev.ru/"
+        },
+		{
+            "name": "Contributors",
+            "homepage": "https://github.com/kachkaev/KachkaevCountersBundle/contributors"
+        }
+    ],
+
+    "require": {
+        "php": ">=5.4.0",
+        "symfony/framework-bundle": ">=2.0,<2.3-dev",
+        "symfony/twig-bundle": ">=2.1.0,<2.3-dev"
+    },
+
+    "require-dev": {
+    },
+
+    "suggest": {
+    },
+
+    "autoload": {
+        "psr-0": {
+            "Kachkaev\\CountersBundle": ""
+        }
+    },
+
+    "target-dir": "Kachkaev/CountersBundle"
+}
