@@ -1,5 +1,8 @@
 parameters:
     kachkaev_counters.disabled: false
     
+    kachkaev_counters.on_off_trigger: counters
+    kachkaev_counters.cookie: kachkaev_counters_off
+    
     kachkaev_counters.google_analytics.id: null
     kachkaev_counters.yandex_metrika.id: null

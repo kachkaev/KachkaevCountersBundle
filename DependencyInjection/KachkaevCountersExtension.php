@@ -27,6 +27,9 @@ class KachkaevCountersExtension extends Extension
         $loader->load('services.yml');
 
         $container->setParameter('kachkaev_counters.disabled', $config['disabled']);
+        if ($config['on_off_trigger']) {
+            $container->setParameter('kachkaev_counters.on_off_trigger', $config['on_off_trigger']);
+        }
         $container->setParameter('kachkaev_counters.google_analytics.id', $config['google_analytics']['id']);
         $container->setParameter('kachkaev_counters.yandex_metrika.id', $config['yandex_metrika']['id']);
     }

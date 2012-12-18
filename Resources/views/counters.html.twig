@@ -1,4 +1,4 @@
-{%- if not countersDisabled() and not app.request.cookies.get('counters_off') -%}
+{%- if not countersDisabled() -%}
 {%- set googleAnalyticsId = getCounterId('google_analytics') -%}
 {%- if (googleAnalyticsId) -%}
 {#--#}<script type="text/javascript">

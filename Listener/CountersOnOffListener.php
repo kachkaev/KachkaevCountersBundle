@@ -6,33 +6,42 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
- * If /?counters_off or /?counters_on present in the request, counters_off cookie is set/unset
+ * If /?counters_off or /?counters_on present in the request URL, kachkaev_counters cookie is set/unset
  *
  */
 class CountersOnOffListener
 {
+    protected $onOffTrigger;
+    protected $cookie;
+    
+    public function __construct($onOffTrigger, $cookie)
+    {
+        $this->onOffTrigger = $onOffTrigger;    
+        $this->cookie = $cookie;    
+    }
+    
     public function onKernelRequest(GetResponseEvent $event)
     {
-        // Setting counters_off cookie
-        if ($event->getRequest()->get('counters_off') !== null) {
+        // Setting counters cookie when there is counters_off in the URL
+        if ($event->getRequest()->query->get($this->onOffTrigger.'_off') !== null) {
 
-            $event->getRequest()->getSession()->setFlash('counters', 'off');
+            $event->getRequest()->getSession()->setFlash($this->cookie, 'off');
 
-            $cleanURI = str_replace('?counters_off', '', $event->getRequest()->server->get('REQUEST_URI'));
+            $cleanURI = str_replace(sprintf('?%s_off', $this->onOffTrigger), '', $event->getRequest()->server->get('REQUEST_URI'));
             $response = new RedirectResponse($cleanURI);
-            $cookie = new Cookie('counters_off', true, '2030-01-01', '/', null, null, false);
+            $cookie = new Cookie($this->cookie, true, '2030-01-01', '/', null, null, false);
             $response->headers->setCookie($cookie);
             $event->setResponse($response);
         }
 
-        // Deleting counters_off cookie
-        if ($event->getRequest()->get('counters_on') !== null) {
+        // Deleting counters cookie when there is counters_on in the URL
+        if ($event->getRequest()->query->get($this->onOffTrigger.'_on') !== null) {
 
-            $event->getRequest()->getSession()->setFlash('counters', 'on');
+            $event->getRequest()->getSession()->setFlash($this->cookie, 'on');
 
-            $cleanURI = str_replace('?counters_on', '', $event->getRequest()->server->get('REQUEST_URI'));
+            $cleanURI = str_replace(sprintf('?%s_on', $this->onOffTrigger), '', $event->getRequest()->server->get('REQUEST_URI'));
             $response = new RedirectResponse($cleanURI);
-            $cookie = new Cookie('counters_off');
+            $cookie = new Cookie($this->cookie);
             $response->headers->setCookie($cookie);
             $event->setResponse($response);
         }

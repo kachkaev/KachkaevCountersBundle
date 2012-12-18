@@ -25,41 +25,11 @@ class Configuration implements ConfigurationInterface
         $rootNode
             -> children()
                 ->booleanNode('disabled')->defaultFalse()->end()
+                ->scalarNode('on_off_trigger')->defaultNull()->end()
             ->end();
 
         $this->addCounter('google_analytics', $rootNode);
         $this->addCounter('yandex_metrika', $rootNode);
-
-        /*
-        ->children()
-        ->arrayNode('economics')
-        ->children()
-        ->scalarNode('nds')->isRequired()->end()
-        ->arrayNode('currencies')
-        ->isRequired()
-        ->prototype('scalar')->end()
-        ->defaultValue(array())
-        ->end()
-        ->arrayNode('currency_exchange')
-        ->canBeUnset()
-        ->addDefaultsIfNotSet()
-        ->children()
-        ->scalarNode('date')->defaultNull()->end()
-        ->arrayNode('rates')
-        ->useAttributeAsKey('name')
-        ->prototype('scalar')->end()
-        ->defaultValue(array())
-        ->end()
-        ->end()
-        ->end()
-        ->end()
-        ->end()
-        ->end()
-        ->end();*/
-
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
 
         return $treeBuilder;
     }
@@ -68,6 +38,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->arrayNode($name)
+                    ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('id')->defaultNull()
                     ->end()
