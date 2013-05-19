@@ -20,8 +20,8 @@
 
     "require": {
         "php": ">=5.4.0",
-        "symfony/framework-bundle": ">=2.0,<2.3-dev",
-        "symfony/twig-bundle": ">=2.1.0,<2.3-dev"
+        "symfony/framework-bundle": ">=2.0,<3.0-dev",
+        "symfony/twig-bundle": ">=2.1.0,<3.0-dev"
     },
 
     "require-dev": {
