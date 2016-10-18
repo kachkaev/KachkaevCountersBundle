@@ -36,7 +36,7 @@ class CountersExtension extends Twig_Extension
 
     public function countersDisabled()
     {
-        return $this->container->getParameter('kachkaev_counters.disabled') || $this->container->get('request')->cookies->get($this->container->getParameter('kachkaev_counters.cookie'));
+        return $this->container->getParameter('kachkaev_counters.disabled') || $this->container->get('request_stack')->getMasterRequest()->cookies->get($this->container->getParameter('kachkaev_counters.cookie'));
     }
 
     public function getCounterId($name)
